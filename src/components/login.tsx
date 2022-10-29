@@ -48,7 +48,7 @@ function Login() {
 
   return (
     <main className="flex h-full min-h-screen items-center justify-center">
-      <div className="h-full w-full max-w-xs">
+      <div className="w-full max-w-xs">
         <form
           className="mb-4 rounded bg-white px-8 pt-6 pb-8 shadow-md"
           onSubmit={onSubmit}

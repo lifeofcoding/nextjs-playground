@@ -1,8 +1,16 @@
 import { useEffect, useRef } from "react";
+import { useTransform, useScroll, motion } from "framer-motion";
 
 function Background() {
+  const { scrollY } = useScroll();
   const ref = useRef<HTMLCanvasElement>(null);
   const frameRef = useRef<number | null>(null);
+
+  const y = useTransform(scrollY, [50, 500], [0, -200]);
+
+  const input = [0, 0, 500];
+  const output = [1, 1, 0];
+  const opacity = useTransform(scrollY, input, output);
 
   useEffect(() => {
     if (!ref.current) return;
@@ -65,14 +73,12 @@ function Background() {
   }, []);
 
   return (
-    <div
+    <motion.div
       style={{
-        clipPath: "polygon(100% 0, 100% 41%, 50% 68%, 0 100%, 0 0)",
-        boxShadow: "0px 0px 4px 0px rgba(0,0,0,0.75)",
-        // backgroundImage:
-        //   " -webkit-gradient(linear, left top, left bottom, from(rgba(50,50,50,0.8)), to(rgba(80,80,80,0.2)), color-stop(.5,#333333));",
+        opacity,
+        y,
       }}
-      className="inset absolute top-0 -z-10 h-3/4 w-screen"
+      className="inset background-clip fixed top-0 -z-10 h-3/4 w-screen shadow-[0_0px_0px_4px_0px_rgba(0,0,0,0.75)]"
     >
       <canvas
         id="canv"
@@ -81,7 +87,7 @@ function Background() {
         ref={ref}
         className=" h-full w-screen"
       ></canvas>
-    </div>
+    </motion.div>
   );
 }
 
