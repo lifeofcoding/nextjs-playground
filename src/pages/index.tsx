@@ -14,9 +14,19 @@ const Home: NextPage = () => {
       </Head>
 
       <main className="container mx-auto flex min-h-screen flex-col items-center justify-center p-4">
-        <h1 className="text-5xl font-extrabold leading-normal text-gray-700 md:text-[5rem]">
-          Fire<span className="text-purple-300">base</span> App
-        </h1>
+        <div className="relative">
+          <h1 className="text-5xl font-extrabold leading-normal text-gray-700 mix-blend-color-burn md:text-[5rem]">
+            <span className="text-red-300">Fire</span>
+            <span className="text-purple-300">base</span> App
+          </h1>
+          <h1
+            className="absolute top-0 left-0 text-5xl font-extrabold leading-normal text-gray-700 opacity-75 md:text-[5rem]"
+            aria-hidden="true"
+          >
+            <span className="text-red-300">Fire</span>
+            <span className="text-purple-300">base</span> App
+          </h1>
+        </div>
         <p className="text-2xl text-gray-700">This stack uses:</p>
         <div className="mt-3 grid gap-3 pt-3 text-center md:grid-cols-3 lg:w-2/3">
           <TechnologyCard
