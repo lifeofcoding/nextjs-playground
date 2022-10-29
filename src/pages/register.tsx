@@ -31,8 +31,8 @@ function Register() {
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const email = emailRef.current.value;
-    const password = passwordRef.current.value;
+    const email = emailRef.current?.value!;
+    const password = passwordRef.current?.value!;
 
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -69,7 +69,7 @@ function Register() {
               name="email"
               placeholder="Email"
               ref={emailRef}
-              value={fields.email.value}
+              value={fields.email?.value}
               onChange={setField}
             />
             {errors.includes("email") && (
@@ -92,7 +92,7 @@ function Register() {
               type="password"
               placeholder="******************"
               ref={passwordRef}
-              value={fields.password.value}
+              value={fields.password?.value}
               onChange={setField}
             />
             {errors.includes("password") && (

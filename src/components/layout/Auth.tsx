@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useSigninCheck } from "reactfire";
 import Login from "../login";
 
-function Auth({ children }) {
+function Auth({ children }: { children: JSX.Element }) {
   const { status, data: signInCheckResult } = useSigninCheck();
 
   if (status === "loading") {

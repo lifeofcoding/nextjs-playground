@@ -13,16 +13,18 @@ type Action = {
   value?: Alert;
 };
 
-const countReducer = (prev: Alert[], action: Action) => {
-  if (action.type === "push") {
-    return [...prev, action.value];
+const countReducer = (value: Alert[], action?: Action | undefined) => {
+  if (action?.type === "push" && action.value) {
+    return [...value, action.value];
   }
-  if (action.type === "pop") {
-    prev.pop();
+  if (action?.type === "pop") {
+    value.pop();
 
-    return [...prev];
+    return [...value];
   }
-  throw new Error("unknown action type");
+
+  return value;
+  // throw new Error("unknown action type");
 };
 
 const countReducerAtom = atomWithReducer<Alert[], Action>([], countReducer);

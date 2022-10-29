@@ -10,7 +10,7 @@ const validateField = (field: Field) => {
   let isValid = true;
   const { validations, value } = field;
 
-  validations.forEach((v) => {
+  validations?.forEach((v) => {
     let passed = v.test(value);
     isValid = isValid && passed;
   });
@@ -36,21 +36,24 @@ export const useForm = (initialData: Field[]) => {
   );
 
   const [fields, setFields] = useState(initial);
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState<string[]>([]);
   const setField = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = fields[e.target.name];
-      value.value = e.target.value;
 
-      const validated = validateField(value);
+      if (value) {
+        value.value = e.target.value;
 
-      if (!validated) {
-        setErrors([...errors, value.name]);
-      } else {
-        setErrors((e) => e.filter((t) => t !== value.name));
+        const validated = validateField(value);
+
+        if (!validated) {
+          setErrors([...errors, value.name]);
+        } else {
+          setErrors((e) => e.filter((t) => t !== value.name));
+        }
+
+        setFields({ ...fields, value });
       }
-
-      setFields({ ...fields, value });
     },
     [fields, errors]
   );
