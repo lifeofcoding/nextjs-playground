@@ -2,23 +2,29 @@ import { useEffect, useRef } from "react";
 
 function Background() {
   const ref = useRef<HTMLCanvasElement>(null);
+  const frameRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (!ref.current) return;
 
-    var c = ref.current;
-    var $ = c.getContext("2d");
+    const $ = ref.current.getContext("2d");
 
-    var col = function (x: number, y: number, r: number, g: number, b: number) {
+    const col = function (
+      x: number,
+      y: number,
+      r: number,
+      g: number,
+      b: number
+    ) {
       if (!$) return;
       $.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
       $.fillRect(x, y, 1, 1);
     };
-    var R = function (x: number, y: number, t: number) {
+    const R = function (x: number, y: number, t: number) {
       return Math.floor(192 + 64 * Math.cos((x * x - y * y) / 300 + t));
     };
 
-    var G = function (x: number, y: number, t: number) {
+    const G = function (x: number, y: number, t: number) {
       return Math.floor(
         192 +
           64 *
@@ -26,7 +32,7 @@ function Background() {
       );
     };
 
-    var B = function (x: number, y: number, t: number) {
+    const B = function (x: number, y: number, t: number) {
       return Math.floor(
         192 +
           64 *
@@ -37,7 +43,7 @@ function Background() {
       );
     };
 
-    var t = 0;
+    let t = 0;
 
     const run = () => {
       for (let x = 0; x <= 35; x++) {
@@ -45,10 +51,17 @@ function Background() {
           col(x, y, R(x, y, t), G(x, y, t), B(x, y, t));
         }
       }
-      t = t + 0.03;
-      window.requestAnimationFrame(run);
+      t = t + 0.01;
+      frameRef.current = window.requestAnimationFrame(run);
     };
+
     run();
+
+    return () => {
+      if (frameRef.current) {
+        window.cancelAnimationFrame(frameRef.current);
+      }
+    };
   }, []);
 
   return (

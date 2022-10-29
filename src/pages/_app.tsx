@@ -4,6 +4,7 @@ import Auth from "../components/layout/Auth";
 import { FirebaseAppProvider } from "reactfire";
 import { AnimatePresence, motion } from "framer-motion";
 import { AppProps } from "next/app";
+import React from "react";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDYS3-j5NXoQbr7mOkYTMsUTa79ETzIoYI",
