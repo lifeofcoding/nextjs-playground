@@ -5,6 +5,7 @@ import { DatabaseProvider, AuthProvider, useFirebaseApp } from "reactfire";
 import { NextRouter } from "next/router";
 import Navbar from "./Navbar";
 import Alerts from "./Alerts";
+import Background from "./Background";
 
 function Main({
   children,
@@ -21,6 +22,7 @@ function Main({
       <AuthProvider sdk={auth}>
         <DatabaseProvider sdk={database}>
           <Navbar path={router.asPath} />
+          <Background />
           <div className="mt-10">{children}</div>
           <Alerts />
         </DatabaseProvider>

@@ -41,7 +41,7 @@ function Navbar({ path }: { path: string }) {
   const inactiveLinkClass =
     "block rounded py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-100 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-white";
   return (
-    <nav className="fixed top-0 left-0 z-20 w-full border-b border-gray-200 bg-white px-2 py-2.5 dark:border-gray-600 dark:bg-gray-900 sm:px-4">
+    <nav className="sticky top-0 left-0 z-20 w-full border-b border-gray-200 bg-white bg-opacity-40 p-5 px-2 py-2.5 backdrop-blur-lg backdrop-filter dark:border-gray-600 dark:bg-gray-900 sm:px-4">
       <div className="container mx-auto flex flex-wrap items-center justify-between">
         <NextLink href="/">
           <a className="flex items-center">
